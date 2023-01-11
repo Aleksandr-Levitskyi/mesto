@@ -1,0 +1,12 @@
+.button--add {
+    width: 150px;
+    height: 50px;
+
+    outline: 2px #fff solid;
+}
+
+@media screen and (max-width: 846px) {
+    .button--add {
+        width: 282px;
+    }
+}

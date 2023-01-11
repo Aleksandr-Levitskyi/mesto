@@ -1,0 +1,16 @@
+.pop-up__form {
+    max-width: 430px;
+    min-height: 330px;
+
+    margin-top: 195px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.pop-up__form--hidden {
+    display: none;
+}

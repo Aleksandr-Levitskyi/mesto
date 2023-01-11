@@ -1,0 +1,12 @@
+.button--edit {
+    width: 24px;
+    height: 24px;
+    outline: 1px #fff solid;
+}
+
+@media screen and (max-width: 320px) {
+    .button--edit {
+        width: 18px;
+        height: 18px;
+    }
+}

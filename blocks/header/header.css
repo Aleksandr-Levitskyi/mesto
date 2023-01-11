@@ -1,0 +1,27 @@
+.header {
+    max-width: calc(100% - 400px);
+    padding: 0;
+    margin: 0 auto;
+}
+
+.header::after {
+    display: block;
+    content: ' ';
+    max-width: calc(100% + 400px);
+    height: 1px;
+
+    background-color: rgba(84, 84, 84, .7);
+}
+
+@media screen and (max-width: 1048px) {
+    .header {
+        max-width: calc(100% - 200px);
+    }
+}
+
+
+@media screen and (max-width: 846px) {
+    .header {
+        max-width: 100%;
+    }
+}
