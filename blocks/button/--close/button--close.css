@@ -3,8 +3,8 @@
     height: 32px;
 
     position: absolute;
-    top: -17px;
-    right: -17px;
+    top: -35px;
+    right: -35px;
 }
 
 @media screen and (max-width: 580px) {
