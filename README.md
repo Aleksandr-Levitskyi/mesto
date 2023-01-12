@@ -3,7 +3,7 @@ _Первый проект с использованием javaScript_
 ___
 
 **Russia.Mesto**
-* [Ссылка на проект](https://aleksandr-levitskyi.github.io/russian-travel/)
+* [Ссылка на проект](https://aleksandr-levitskyi.github.io/mesto/)
 
 ## Технологии
 
