@@ -14,7 +14,19 @@
 /* avatar */
 @import url(../blocks/avatar/avatar.css);
 
+/* form */
 @import url(../blocks/form/form.css);
+@import url(../blocks/form/--profile-edit/form--profile-edit.css);
+@import url(../blocks/form/__button/form__button.css);
+@import url(../blocks/form/__heading/form__heading.css);
+@import url(../blocks/form/__input-area/form__input-area.css);
+
+/* popup */
+@import url(../blocks/popup/--hidden/popup--hidden.css);
+@import url(../blocks/popup/popup.css);
+
+/* input */
+@import url(../blocks/input/input.css);
 
 /* button */
 @import url(../blocks/button/button.css);
@@ -39,6 +51,3 @@
 /* footer */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/footer__copyright/footer__copyright.css);
-
-@import url(../blocks/popup/popup.css);
-@import url(../blocks/input/input.css);

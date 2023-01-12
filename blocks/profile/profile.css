@@ -55,8 +55,8 @@
 @media screen and (max-width: 846px) {
     .profile {
         max-width: 100%;
-        margin-top: 42px;
-        margin-bottom: 36px;
+        margin-top: 37px;
+        margin-bottom: 32px;
 
         display: flex;
         flex-direction: column;
@@ -68,7 +68,7 @@
     }
 
     .profile__photo {
-        margin: 0 0 26px 0;
+        margin: 0 0 21px 0;
     }
 
     .name-area {
