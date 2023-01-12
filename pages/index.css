@@ -11,12 +11,6 @@
 /* profile */
 @import url(../blocks/profile/profile.css);
 
-/* pop-up */
-@import url(../blocks/pop-up/pop-up.css);
-@import url(../blocks/pop-up/__title/pop-up__title.css);
-@import url(../blocks/pop-up/__input/pop-up__input.css);
-@import url(../blocks/pop-up/__form/pop-up__form.css);
-
 /* avatar */
 @import url(../blocks/avatar/avatar.css);
 

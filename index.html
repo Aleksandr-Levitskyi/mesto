@@ -16,14 +16,16 @@
     </header>
     <main class="content">
         <section class="popup popup--hidden">
-            <form action="" class="form form_profile-edit">
+            <form action="submit" class="form form--profile-edit">
                 <button class="button button--close">
                     <img src="./images/closeButton.svg" alt="Закрыть" class="button__icon button__icon--close">
                 </button>
                 <p class="form__heading">Редактировать профиль</p>
                 <div class="form__input-area">
-                    <input type="text" name="" id="" class="input input_name" placeholder="Ваше имя...">
-                    <input type="text" name="" id="" class="input input_job" placeholder="Ваше профессия...">
+                    <input type="text" name="name" id="name" class="input input--name" placeholder="Ваше имя..."
+                        value="">
+                    <input type="text" name="job" id="job" class="input input--job" placeholder="Ваше профессия..."
+                        value="">
                 </div>
                 <input type="submit" value="Сохранить" class="form__button">
             </form>
@@ -107,6 +109,7 @@
     </footer>
 
     <script src="./scripts/popup.js"></script>
+    <script src="./scripts/form__input.js"></script>
 </body>
 
 </html>
