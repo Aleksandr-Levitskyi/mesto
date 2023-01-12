@@ -1,10 +1,10 @@
-.form--profile-edit {
+.form_profile-edit {
     position: relative;
     margin-top: 195px;
 }
 
 @media screen and (max-width: 580px) {
-    .form--profile-edit {
+    .form_profile-edit {
         margin-top: 123px;
     }
 }

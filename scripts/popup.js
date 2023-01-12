@@ -1,28 +1,27 @@
-let editButton = document.querySelector('.button--edit');
-let closeButton = document.querySelector('.button--close');
+let editButton = document.querySelector('.button_edit');
+let closeButton = document.querySelector('.button_close');
 
 function lookPopUp(evt) {
     let popUp = document.querySelector('.popup');
 
-    popUp.classList.remove('popup--hidden');
+    popUp.classList.remove('popup_hidden');
 }
 
 function hiddenPopUp(evt) {
     evt.preventDefault(); //отменяет перезагрузку страницы
     let popUp = document.querySelector('.popup');
 
-    popUp.classList.add('popup--hidden');
+    popUp.classList.add('popup_hidden');
 }
 
 editButton.addEventListener('click', lookPopUp);
 closeButton.addEventListener('click', hiddenPopUp);
 
 
+let editForm = document.querySelector('.form_profile-edit');
 
-let editForm = document.querySelector('.form--profile-edit');
-
-let nameInput = document.querySelector('.input--name')
-let jobInput = document.querySelector('.input--job')
+let nameInput = document.querySelector('.input_name')
+let jobInput = document.querySelector('.input_job')
 
 
 nameInput.value = document.querySelector('.profile__name').textContent;
@@ -37,7 +36,7 @@ function setInput(evt) {
     document.querySelector('.profile__name').textContent = nameInput.value;
     document.querySelector('.profile__job').textContent = jobInput.value;
 
-    document.querySelector('.popup').classList.add('popup--hidden');
+    document.querySelector('.popup').classList.add('popup_hidden');
 }
 
 function closeForm() {
@@ -45,4 +44,4 @@ function closeForm() {
 }
 
 editForm.addEventListener('submit', setInput);
-document.querySelector('.button__icon--close').addEventListener('click', closeForm);
+document.querySelector('.button__icon_close').addEventListener('click', closeForm);
