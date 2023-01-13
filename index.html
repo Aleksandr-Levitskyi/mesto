@@ -16,91 +16,60 @@
         <a href="#" target="_blank"><img src="./images/mestoLogo.svg" alt="Место" class="header__logo"></a>
     </header>
     <main class="content">
-        <section class="popup popup_hidden">
-            <form action="submit" class="form form_profile-edit">
-                <button class="button button_close">
-                    <img src="./images/closeButton.svg" alt="Закрыть" class="button__icon button__icon_close">
-                </button>
-                <p class="form__heading">Редактировать профиль</p>
-                <div class="form__input-area">
-                    <input type="text" name="name" id="name" class="input input_name" placeholder="Ваше имя..."
-                        value="">
-                    <input type="text" name="job" id="job" class="input input_job" placeholder="Ваше профессия..."
-                        value="">
-                </div>
-                <input type="submit" value="Сохранить" class="form__button">
-            </form>
-        </section>
         <section class="profile">
             <div class="profile__information">
                 <img src="./images/avatar.jpg" alt="Аватар" class="profile__photo">
                 <div class="profile__about-me">
-                    <div class="name-area">
-                        <p class="profile__name">Жак-Ив Кусто</p>
-                        <button class="button button_edit" type="button">
-                            <img src="./images/editButton.svg" alt="Редактировать" class="button__icon">
-                        </button>
+                    <div class="profile__name-area">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button type="button" class="button button_type_edit" aria-label="Редактировать"></button>
                     </div>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
             </div>
-            <button class="button button_add">
-                <img src="./images/addButton.svg" alt="Добавить" class="button__icon button__icon_add">
-            </button>
+            <button class="button button_type_add" type="button" aria-label="Добавить"></button>
         </section>
         <section class="photo-cards">
             <article class="photo">
                 <img src="./images/tyumen.jpg" alt="Тюмень" class="photo__cover">
                 <div class="photo__title-area">
-                    <span class="photo__title">Тюмень</span>
-                    <button class="button button_like" type="button">
-                        <img src="./images/likeButton.svg" alt="Нравится" class="button__icon button__icon_like">
-                    </button>
+                    <h2 class="photo__title">Тюмень</h2>
+                    <button class="button button_type_like" type="button" aria-label="Нравится"></button>
                 </div>
             </article>
             <article class="photo">
-                <img src="./images/karachevsk.jpg" alt="Карачаево-Черкесия" class="photo__cover">
+                <img src="./images/kazan.jpg" alt="Казань" class="photo__cover">
                 <div class="photo__title-area">
-                    <span class="photo__title">Карачаево-Черкесия</span>
-                    <button class="button button_like" type="button">
-                        <img src="./images/likeButton.svg" alt="Нравится" class="button__icon button__icon_like">
-                    </button>
+                    <h2 class="photo__title">Казань</h2>
+                    <button class="button button_type_like" type="button" aria-label="Нравится"></button>
                 </div>
             </article>
             <article class="photo">
-                <img src="./images/dombai.jpg" alt="Домбай" class="photo__cover">
+                <img src="./images/altay.jpg" alt="Алтай" class="photo__cover">
                 <div class="photo__title-area">
-                    <span class="photo__title">Домбай</span>
-                    <button class="button button_like" type="button">
-                        <img src="./images/likeButton.svg" alt="Нравится" class="button__icon button__icon_like">
-                    </button>
+                    <h2 class="photo__title">Алтай</h2>
+                    <button class="button button_type_like" type="button" aria-label="Нравится"></button>
                 </div>
             </article>
             <article class="photo">
-                <img src="./images/dombai.jpg" alt="Домбай" class="photo__cover">
+                <img src="./images/moscow.jpg" alt="Москва" class="photo__cover">
                 <div class="photo__title-area">
-                    <span class="photo__title">Домбай</span>
-                    <button class="button button_like" type="button">
-                        <img src="./images/likeButton.svg" alt="Нравится" class="button__icon button__icon_like">
-                    </button>
+                    <h2 class="photo__title">Москва</h2>
+                    <button class="button button_type_like" type="button" aria-label="Нравится"></button>
                 </div>
             </article>
             <article class="photo">
-                <img src="./images/albrus.jpg" alt="Гора Эльбрус" class="photo__cover">
+                <img src="./images/velikiyNovgorod.jpg" alt="Великий новгорож" class="photo__cover">
                 <div class="photo__title-area">
-                    <span class="photo__title">Гора Эльбрус</span>
-                    <button class="button button_like" type="button">
-                        <img src="./images/likeButton.svg" alt="Нравится" class="button__icon button__icon_like">
-                    </button>
+                    <h2 class="photo__title">Великий Новгород</h2>
+                    <button class="button button_type_like" type="button" aria-label="Нравится"></button>
                 </div>
             </article>
             <article class="photo">
-                <img src="./images/dombai.jpg" alt="Домбай" class="photo__cover">
+                <img src="./images/saintP.jpg" alt="Санкт-Петербург" class="photo__cover">
                 <div class="photo__title-area">
-                    <span class="photo__title">Домбай</span>
-                    <button class="button button_like" type="button">
-                        <img src="./images/likeButton.svg" alt="Нравится" class="button__icon button__icon_like">
-                    </button>
+                    <h2 class="photo__title">Санкт-Петербург</h2>
+                    <button class="button button_type_like" type="button" aria-label="Нравится"></button>
                 </div>
             </article>
         </section>
@@ -108,6 +77,23 @@
     <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+
+    <div class="popup">
+        <div class="popup__form">
+            <form name="finput" action="submit" method="post" class="form form_profile_input">
+                <h2 class="form__heading">Редактировать профиль</h2>
+                <fieldset class="form__input-area">
+                    <input maxlength="16" type="text" name="name" id="name" class="input input_type_name"
+                        placeholder="Ваше имя..." value="">
+                    <input maxlength="25" type="text" name="job" id="job" class="input input_type_job"
+                        placeholder="Ваша профессия..." value="">
+                </fieldset>
+                <input type="submit" value="Сохранить" class="form__button">
+            </form>
+            <button type="button" class="button button_type_close" aria-label="Закрыть">
+            </button>
+        </div>
+    </div>
 
     <script src="./scripts/popup.js"></script>
 </body>

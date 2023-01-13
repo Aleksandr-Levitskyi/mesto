@@ -1,5 +1,5 @@
 .form__heading {
-    margin: 0 0 0 36px;
+    margin: 34px 0 0;
     padding: 0;
 
     align-self: flex-start;
@@ -13,8 +13,9 @@
 
 @media screen and (max-width: 580px) {
     .form__heading {
-        margin: 0 0 0 22px;
         font-size: 18px;
         line-height: 22px;
+
+        margin: 20px 0 0;
     }
 }

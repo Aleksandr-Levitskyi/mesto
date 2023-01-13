@@ -1,47 +1,38 @@
-let editButton = document.querySelector('.button_edit');
-let closeButton = document.querySelector('.button_close');
+let nameInfo = document.querySelector('.profile__name'); //имя
+let jobInfo = document.querySelector('.profile__job'); //профессия
 
-function lookPopUp(evt) {
-    let popUp = document.querySelector('.popup');
+let popUp = document.querySelector('.popup'); //модальное окно
+let popupForm = document.querySelector('.popup__form'); //блок с формой попапа
 
-    popUp.classList.remove('popup_hidden');
+let nameInput = document.querySelector('.input_type_name'); //инпут имя
+let jobInput = document.querySelector('.input_type_job'); //инпут профессия
+
+let closeBtn = document.querySelector('.button_type_close'); //кнопка закрыть
+let editBtn = document.querySelector('.button_type_edit'); //кнопка редактировать
+
+//открытие попап
+function openPopup() {
+    nameInput.value = nameInfo.textContent;
+    jobInput.value = jobInfo.textContent;
+
+    popUp.classList.add('popup__opened');
 }
 
-function hiddenPopUp(evt) {
-    evt.preventDefault(); //отменяет перезагрузку страницы
-    let popUp = document.querySelector('.popup');
-
-    popUp.classList.add('popup_hidden');
+//close popup
+function closePopup() {
+    popUp.classList.remove('popup__opened');
 }
 
-editButton.addEventListener('click', lookPopUp);
-closeButton.addEventListener('click', hiddenPopUp);
-
-
-let editForm = document.querySelector('.form_profile-edit');
-
-let nameInput = document.querySelector('.input_name')
-let jobInput = document.querySelector('.input_job')
-
-
-nameInput.value = document.querySelector('.profile__name').textContent;
-jobInput.value = document.querySelector('.profile__job').textContent;
-
-function setInput(evt) {
+//set InputValue
+function setInputValue(evt) {
     evt.preventDefault();
 
-    nameInput.value;
-    jobInput.value;
+    nameInfo.textContent = nameInput.value;
+    jobInfo.textContent = jobInput.value;
 
-    document.querySelector('.profile__name').textContent = nameInput.value;
-    document.querySelector('.profile__job').textContent = jobInput.value;
-
-    document.querySelector('.popup').classList.add('popup_hidden');
+    closePopup();
 }
 
-function closeForm() {
-    nameInput.value = document.querySelector('.profile__name').textContent;
-}
-
-editForm.addEventListener('submit', setInput);
-document.querySelector('.button__icon_close').addEventListener('click', closeForm);
+editBtn.addEventListener('click', openPopup);
+closeBtn.addEventListener('click', closePopup);
+popUp.addEventListener('submit', setInputValue);
