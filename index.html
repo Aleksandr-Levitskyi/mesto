@@ -95,6 +95,26 @@
         </div>
     </div>
 
+    <template id="popUp">
+        <div class="popup">
+            <div class="popup__form">
+                <form name="finput" action="submit" method="post" class="form">
+                    <!-- тут нужно добавить класс с конкрктным импутом, например:  form_profile_input-->
+                    <h2 class="form__heading"></h2>
+                    <fieldset class="form__input-area">
+                        <!-- плейсхолдеры тоже должны заполнятся в зависимости от содержания формы -->
+                        <input type="text" name="name" id="name" class="input input_type_name" placeholder="" value="">
+                        <input type="text" name="job" id="job" class="input" placeholder="" value="">
+                        <!-- добавить класс в зависимости от импута, например: input_type_job -->
+                    </fieldset>
+                    <input type="submit" value="Сохранить" class="form__button">
+                </form>
+                <button type="button" class="button button_type_close" aria-label="Закрыть">
+                </button>
+            </div>
+        </div>
+    </template>
+
     <script src="./scripts/popup.js"></script>
 </body>
 
