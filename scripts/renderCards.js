@@ -49,4 +49,3 @@ initialCards.forEach((item) => {
     console.log(item);
 });
 
-
