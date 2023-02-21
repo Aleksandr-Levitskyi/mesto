@@ -1,13 +1,13 @@
 let nameInfo = document.querySelector('.profile__name'); //имя
 let jobInfo = document.querySelector('.profile__job'); //профессия
 
-let popUp = document.querySelector('.popup'); //модальное окно
-let popupForm = document.querySelector('.popup__form'); //блок с формой попапа
+let popUp = document.querySelector('.popup_edit'); //модальное окно
+let popupForm = document.querySelector('.popup__form_type_edit'); //блок с формой попапа
 
 let nameInput = document.querySelector('.input_type_name'); //инпут имя
 let jobInput = document.querySelector('.input_type_job'); //инпут профессия
 
-let closeBtn = document.querySelector('.button_type_close'); //кнопка закрыть
+/* let closeBtnEdit = document.querySelector('.button_closeEdit'); //кнопка закрыть */
 let editBtn = document.querySelector('.button_type_edit'); //кнопка редактировать
 
 //открытие попап
@@ -34,5 +34,5 @@ function setInputValue(evt) {
 }
 
 editBtn.addEventListener('click', openPopup);
-closeBtn.addEventListener('click', closePopup);
+/* closeBtnEdit.addEventListener('click', closePopup); */
 popupForm.addEventListener('submit', setInputValue);
