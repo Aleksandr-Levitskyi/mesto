@@ -1,56 +1,64 @@
-const initialCards = [
-  {
-    name: 'Тюмень',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Москва',
-    link: 'https://plus.unsplash.com/premium_photo-1663040037208-22bcd243c685?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-  },
-  {
-    name: 'Нижний-Новгород',
-    link: 'https://images.unsplash.com/photo-1589213292055-4cd2e6af6d52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80'
-  }
-]
+const btnCloseArr = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
+const editBtn = document.querySelector('.button_type_edit'); //кнопка редактировать
+const addBtn = document.querySelector('.button_type_add'); //кнопка добавить карточку
 
-const cardWrapper = document.querySelector('.photo-cards'); //куда вставлять элемент
-const addForm = document.querySelector('.popup__form_type_add'); // форма для листнера
+const nameInput = document.querySelector('.input_type_name'); //инпут имя
+const jobInput = document.querySelector('.input_type_job'); //инпут профессия
+const nameInfo = document.querySelector('.profile__name'); //имя
+const jobInfo = document.querySelector('.profile__job'); //профессия
 
-const inputPlaceName = document.querySelector('.input_type_placeName'); //инпут в который
-const inputPlaceLink = document.querySelector('.input_type_placeLink');
+const popupAddForm = document.querySelector('.popup__form_type_add'); //форма добавления карточки
+const popupEditForm = document.querySelector('.popup_type_edit'); //форма редактирования профиля
 
-const cardTemplate = document.getElementById('card-template');
+//функции которые открывают и закрывают попап,
+//принимают в качестве аргумента определенный попап
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+}
 
-const getCardInfo = (name, link) => {
-  const newCardInfo = cardTemplate.content.cloneNode(true); //Получили клон шаблона
-
-  const newCardName = newCardInfo.querySelector('.photo__title'); // нашли элемент имя
-  const newCardLink = newCardInfo.querySelector('.photo__cover').scr; // нашли элемент ссылку на обложку
-
-  newCardName.textContent = name; // Присвоили данные имени
-  newCardLink = link; // присвоили данные ссылки
-
-  return newCardInfo;
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
 };
 
-const renderCard = (wrap, name, link) => {
-  wrap.append(getCardInfo(name, link));
-};
+//перебор массива и присваивание каждой кнопке обрботчик событий
+//для удаления класса popup_opened
+btnCloseArr.forEach((btn) => {
+  btn.addEventListener('click', (evt) => {
+    const target = evt.target;
+    const currentPopup = target.closest('.popup');
 
-initialCards.forEach((item) => {
-  renderCard(cardWrapper, item.name, item.link);
-});
+    closePopup(currentPopup);
+  });
+})
 
-addForm.addEventListener('submit', (evt) => {
+//функции для того отдельных кнопок и попапов
+const openPopupAdd = () => {
+  const popupAdd = document.querySelector('.popup_type_add');
+
+  openPopup(popupAdd);
+}
+
+const openPopupEdit = () => {
+  const popupEdit = document.querySelector('.popup_type_edit');
+
+  nameInput.value = nameInfo.textContent;
+  jobInput.value = jobInfo.textContent;
+
+  openPopup(popupEdit);
+}
+
+function setInputValue(evt) {
   evt.preventDefault();
 
-  const name = inputPlaceName.value;
-  const link = inputPlaceLink.value;
+  nameInfo.textContent = nameInput.value;
+  jobInfo.textContent = jobInput.value;
 
-  console.log(name);
-  console.log(link);
+  closePopup(popupEditForm);
+}
 
-  renderCard(cardWrapper, name, link);
-  inputPlaceName.value = '';
-  inputPlaceLink.value = '';
-});
+
+editBtn.addEventListener('click', openPopupEdit);
+addBtn.addEventListener('click', openPopupAdd);
+popupEditForm.addEventListener('submit', setInputValue);
+
+
