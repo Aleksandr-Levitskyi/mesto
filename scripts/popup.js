@@ -7,32 +7,32 @@ let popupForm = document.querySelector('.popup__form'); //блок с формо
 let nameInput = document.querySelector('.input_type_name'); //инпут имя
 let jobInput = document.querySelector('.input_type_job'); //инпут профессия
 
-let closeBtn = document.querySelector('.button_type_close'); //кнопка закрыть
+//let closeBtn = document.querySelector('.button_type_close'); //кнопка закрыть
 let editBtn = document.querySelector('.button_type_edit'); //кнопка редактировать
 
 //открытие попап
 function openPopup() {
-    nameInput.value = nameInfo.textContent;
-    jobInput.value = jobInfo.textContent;
+  nameInput.value = nameInfo.textContent;
+  jobInput.value = jobInfo.textContent;
 
-    popUp.classList.add('popup_opened');
+  popUp.classList.add('popup_opened');
 }
 
 //close popup
 function closePopup() {
-    popUp.classList.remove('popup_opened');
+  popUp.classList.remove('popup_opened');
 }
 
 //set InputValue
 function setInputValue(evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    nameInfo.textContent = nameInput.value;
-    jobInfo.textContent = jobInput.value;
+  nameInfo.textContent = nameInput.value;
+  jobInfo.textContent = jobInput.value;
 
-    closePopup();
+  closePopup();
 }
 
 editBtn.addEventListener('click', openPopup);
-closeBtn.addEventListener('click', closePopup);
+//closeBtn.addEventListener('click', closePopup);
 popupForm.addEventListener('submit', setInputValue);
