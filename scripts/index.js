@@ -44,6 +44,7 @@ const jobInfo = document.querySelector('.profile__job'); //профессия
 const popupAddForm = document.querySelector('.popup_type_add'); //форма добавления карточки
 const popupEditForm = document.querySelector('.popup_type_edit'); //форма редактирования профиля
 
+
 //функции которые открывают и закрывают попап,
 //принимают в качестве аргумента определенный попап
 const openPopup = (popup) => {
@@ -54,16 +55,6 @@ const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
 };
 
-//перебор массива и присваивание каждой кнопке обрботчик событий
-//для удаления класса popup_opened
-btnCloseArr.forEach((btn) => {
-    btn.addEventListener('click', (evt) => {
-        const target = evt.target;
-        const currentPopup = target.closest('.popup');
-
-        closePopup(currentPopup);
-    });
-})
 
 //функции для того отдельных кнопок и попапов
 const openPopupAdd = () => {
@@ -100,6 +91,11 @@ const getCardInfo = (name, link) => {
     namePlace.textContent = name;
     linkPlace.setAttribute('src', link);
 
+    const likeBtn = newCard.querySelector('.button_type_like');
+    likeBtn.addEventListener('click', (evt) => {
+        evt.target.classList.toggle('button_type_like_is-active');
+    });
+
     return newCard;
 }
 
@@ -121,14 +117,25 @@ const setInputPlace = (evt) => {
     closePopup(popupAddForm);
 }
 
+
+//перебор массива и присваивание каждой кнопке обрботчик событий
+//для удаления класса popup_opened
+btnCloseArr.forEach((btn) => {
+    btn.addEventListener('click', (evt) => {
+        const target = evt.target;
+        const currentPopup = target.closest('.popup');
+
+        closePopup(currentPopup);
+    });
+})
+
+
 initialCards.forEach((item) => {
     createCard(cardArea, item.name, item.link);
-    console.log(item);
 });
 
 editBtn.addEventListener('click', openPopupEdit);
 addBtn.addEventListener('click', openPopupAdd);
 popupEditForm.addEventListener('submit', setInputValue);
 popupAddForm.addEventListener('submit', setInputPlace);
-
 
