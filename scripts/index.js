@@ -44,7 +44,6 @@ const jobInfo = document.querySelector('.profile__job'); //профессия
 const popupAddForm = document.querySelector('.popup_type_add'); //форма добавления карточки
 const popupEditForm = document.querySelector('.popup_type_edit'); //форма редактирования профиля
 
-
 //функции которые открывают и закрывают попап,
 //принимают в качестве аргумента определенный попап
 const openPopup = (popup) => {
@@ -62,6 +61,12 @@ const openPopupAdd = () => {
     openPopup(popupAdd);
 }
 
+const openPopupImage = () => {
+    const popupImg = document.querySelector('.popup_type_image');
+
+    openPopup(popupImg);
+}
+
 const openPopupEdit = () => {
     const popupEdit = document.querySelector('.popup_type_edit');
 
@@ -70,6 +75,22 @@ const openPopupEdit = () => {
 
     openPopup(popupEdit);
 }
+
+const setImgInfo = () => {
+    const cardImg = document.querySelector('.photo__cover');
+    const nameCard = document.querySelector('.photo__title');
+
+    const coverImg = document.querySelector('.popup__cover');
+    const captureImg = document.querySelector('.popup__cover-caption');
+
+    coverImg.setAttribute('src', cardImg.src);
+    captureImg.textContent = nameCard.textContent;
+}
+
+document.querySelector('.test_button').addEventListener('click', (evt) => {
+    evt.target;
+    setImgInfo();
+})
 
 function setInputValue(evt) {
     evt.preventDefault();
