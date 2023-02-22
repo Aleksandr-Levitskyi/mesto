@@ -55,7 +55,6 @@ const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
 };
 
-
 //функции для того отдельных кнопок и попапов
 const openPopupAdd = () => {
     const popupAdd = document.querySelector('.popup_type_add');
@@ -81,20 +80,28 @@ function setInputValue(evt) {
     closePopup(popupEditForm);
 }
 
+const handleRemove = (evt) => {
+    evt.target.closest('.photo').remove();
+}
+
+const hadleLike = (evt) => {
+    evt.target.classList.toggle('button_type_like_is-active');
+}
+
 //код для добавления карточки
 const getCardInfo = (name, link) => {
     const newCard = templateCards.content.cloneNode(true);
 
+    const likeBtn = newCard.querySelector('.button_type_like');
+    const removeBtn = newCard.querySelector('.button_type_remove');
     let namePlace = newCard.querySelector('.photo__title');
     let linkPlace = newCard.querySelector('.photo__cover');
 
     namePlace.textContent = name;
     linkPlace.setAttribute('src', link);
 
-    const likeBtn = newCard.querySelector('.button_type_like');
-    likeBtn.addEventListener('click', (evt) => {
-        evt.target.classList.toggle('button_type_like_is-active');
-    });
+    likeBtn.addEventListener('click', hadleLike);
+    removeBtn.addEventListener('click', handleRemove);
 
     return newCard;
 }
@@ -117,7 +124,6 @@ const setInputPlace = (evt) => {
     closePopup(popupAddForm);
 }
 
-
 //перебор массива и присваивание каждой кнопке обрботчик событий
 //для удаления класса popup_opened
 btnCloseArr.forEach((btn) => {
@@ -127,7 +133,7 @@ btnCloseArr.forEach((btn) => {
 
         closePopup(currentPopup);
     });
-})
+});
 
 
 initialCards.forEach((item) => {
