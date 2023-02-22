@@ -35,6 +35,7 @@
 @import url(../blocks/button/_type/_close/button_type_close.css);
 @import url(../blocks/button/_type/_edit/button_type_edit.css);
 @import url(../blocks/button/_type/_like/button_type_like.css);
+@import url(../blocks/button/_type/_like/_is-active/button_type_like_is-active.css);
 
 /* form */
 @import url(../blocks/form/__button/form__button.css);
