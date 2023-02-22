@@ -1,4 +1,5 @@
 .photo {
+    position: relative;
     width: 282px;
 
     display: flex;
