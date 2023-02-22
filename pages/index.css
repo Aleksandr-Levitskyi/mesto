@@ -21,6 +21,7 @@
 
 /* photo */
 @import url(../blocks/photo/photo.css);
+@import url(../blocks/photo/__button/photo__button.css);
 @import url(../blocks/photo/__cover/photo__cover.css);
 @import url(../blocks/photo/__title-area/photo__title-area.css);
 @import url(../blocks/photo/__title/photo__title.css);

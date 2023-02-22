@@ -44,8 +44,7 @@ const jobInfo = document.querySelector('.profile__job'); //профессия
 const popupAddForm = document.querySelector('.popup_type_add'); //форма добавления карточки
 const popupEditForm = document.querySelector('.popup_type_edit'); //форма редактирования профиля
 
-//функции которые открывают и закрывают попап,
-//принимают в качестве аргумента определенный попап
+
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
 }
@@ -54,17 +53,11 @@ const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
 };
 
-//функции для того отдельных кнопок и попапов
+
 const openPopupAdd = () => {
     const popupAdd = document.querySelector('.popup_type_add');
 
     openPopup(popupAdd);
-}
-
-const openPopupImage = () => {
-    const popupImg = document.querySelector('.popup_type_image');
-
-    openPopup(popupImg);
 }
 
 const openPopupEdit = () => {
@@ -74,6 +67,13 @@ const openPopupEdit = () => {
     jobInput.value = jobInfo.textContent;
 
     openPopup(popupEdit);
+}
+
+const openPopupImage = () => {
+    const popupImg = document.querySelector('.popup_type_image');
+    setImgInfo();
+
+    openPopup(popupImg);
 }
 
 const setImgInfo = () => {
@@ -86,11 +86,6 @@ const setImgInfo = () => {
     coverImg.setAttribute('src', cardImg.src);
     captureImg.textContent = nameCard.textContent;
 }
-
-document.querySelector('.test_button').addEventListener('click', (evt) => {
-    evt.target;
-    setImgInfo();
-})
 
 function setInputValue(evt) {
     evt.preventDefault();
@@ -115,6 +110,7 @@ const getCardInfo = (name, link) => {
 
     const likeBtn = newCard.querySelector('.button_type_like');
     const removeBtn = newCard.querySelector('.button_type_remove');
+    const fullImgBtn = newCard.querySelector('.photo__button');
     let namePlace = newCard.querySelector('.photo__title');
     let linkPlace = newCard.querySelector('.photo__cover');
 
@@ -123,6 +119,10 @@ const getCardInfo = (name, link) => {
 
     likeBtn.addEventListener('click', hadleLike);
     removeBtn.addEventListener('click', handleRemove);
+    fullImgBtn.addEventListener('click', (evt) => {
+        evt.target;
+        openPopupImage();
+    });
 
     return newCard;
 }
@@ -145,8 +145,6 @@ const setInputPlace = (evt) => {
     closePopup(popupAddForm);
 }
 
-//перебор массива и присваивание каждой кнопке обрботчик событий
-//для удаления класса popup_opened
 btnCloseArr.forEach((btn) => {
     btn.addEventListener('click', (evt) => {
         const target = evt.target;
@@ -155,7 +153,6 @@ btnCloseArr.forEach((btn) => {
         closePopup(currentPopup);
     });
 });
-
 
 initialCards.forEach((item) => {
     createCard(cardArea, item.name, item.link);
