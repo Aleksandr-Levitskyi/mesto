@@ -45,15 +45,16 @@ const popupAddForm = document.querySelector('.popup_type_add'); //форма д�
 const popupEditForm = document.querySelector('.popup_type_edit'); //форма редактирования профиля
 
 
+//ф-ция открытия попап (общая)
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
 }
-
+//ф-ция закрытия попап (общая)
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
 };
 
-
+//ф-ции открытия определенных попапов
 const openPopupAdd = () => {
     const popupAdd = document.querySelector('.popup_type_add');
 
@@ -69,24 +70,13 @@ const openPopupEdit = () => {
     openPopup(popupEdit);
 }
 
-const openPopupImage = () => {
+const openPopupImage = (a, b) => {
     const popupImg = document.querySelector('.popup_type_image');
-    setImgInfo();
 
     openPopup(popupImg);
 }
 
-const setImgInfo = () => {
-    const cardImg = document.querySelector('.photo__cover');
-    const nameCard = document.querySelector('.photo__title');
-
-    const coverImg = document.querySelector('.popup__cover');
-    const captureImg = document.querySelector('.popup__cover-caption');
-
-    coverImg.setAttribute('src', cardImg.src);
-    captureImg.textContent = nameCard.textContent;
-}
-
+//присвоние введенных имени и профессии
 function setInputValue(evt) {
     evt.preventDefault();
 
@@ -96,21 +86,24 @@ function setInputValue(evt) {
     closePopup(popupEditForm);
 }
 
+//удаление карточки, при клике на корзину
 const handleRemove = (evt) => {
     evt.target.closest('.photo').remove();
 }
 
+//лайк
 const hadleLike = (evt) => {
     evt.target.classList.toggle('button_type_like_is-active');
 }
 
 //код для добавления карточки
-const getCardInfo = (name, link) => {
+const createCards = (name, link) => {
     const newCard = templateCards.content.cloneNode(true);
 
     const likeBtn = newCard.querySelector('.button_type_like');
     const removeBtn = newCard.querySelector('.button_type_remove');
     const fullImgBtn = newCard.querySelector('.photo__button');
+
     let namePlace = newCard.querySelector('.photo__title');
     let linkPlace = newCard.querySelector('.photo__cover');
 
@@ -120,24 +113,29 @@ const getCardInfo = (name, link) => {
     likeBtn.addEventListener('click', hadleLike);
     removeBtn.addEventListener('click', handleRemove);
     fullImgBtn.addEventListener('click', (evt) => {
-        evt.target;
+        const popapImg = document.querySelector('.popup__cover');
+        const popupCaption = document.querySelector('.popup__cover-caption');
+
+        popapImg.src = linkPlace.src;
+        popupCaption.textContent = namePlace.textContent;
         openPopupImage();
     });
 
     return newCard;
 }
 
-const createCard = (wrap, name, link) => {
-    wrap.prepend(getCardInfo(name, link));
+const renderCard = (wrap, name, link) => {
+    wrap.prepend(createCards(name, link));
 }
 
+//присвоение данных о карточке (имя + линк)
 const setInputPlace = (evt) => {
     evt.preventDefault();
 
     const title = namePlace.value;
     const link = linkPlace.value;
 
-    createCard(cardArea, title, link);
+    renderCard(cardArea, title, link);
 
     namePlace.value = '';
     linkPlace.value = '';
@@ -155,7 +153,7 @@ btnCloseArr.forEach((btn) => {
 });
 
 initialCards.forEach((item) => {
-    createCard(cardArea, item.name, item.link);
+    renderCard(cardArea, item.name, item.link);
 });
 
 editBtn.addEventListener('click', openPopupEdit);
