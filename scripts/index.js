@@ -34,23 +34,23 @@ const closePopup = (popup) => {
 };
 
 //ф-ции открытия определенных попапов
-const openPopupAdd = () => {
+const openPopupAddCards = () => {
     openPopup(popupAddCard);
 }
 
-const openPopupEdit = () => {
+const openPopupEditProfile = () => {
     profileInputName.value = profileName.textContent;
     profileInputJob.value = profileJob.textContent;
 
     openPopup(popupEditProfile);
 }
 
-const openPopupImage = () => {
+const openPopupFullScreenImg = () => {
     openPopup(popupFullScreenImg);
 }
 
 //присвоние введенных имени и профессии
-function setInputValue(evt) {
+function setInputProfileValue(evt) {
     evt.preventDefault();
 
     profileName.textContent = profileInputName.value;
@@ -60,12 +60,12 @@ function setInputValue(evt) {
 }
 
 //удаление карточки, при клике на корзину
-const handleRemove = (evt) => {
+const handleRemoveCard = (evt) => {
     evt.target.closest('.photo').remove();
 }
 
 //лайк
-const hadleLike = (evt) => {
+const hadleLikeCard = (evt) => {
     evt.target.classList.toggle('button_type_like_is-active');
 }
 
@@ -83,31 +83,31 @@ const createCards = (name, link) => {
     titleCardPlace.textContent = name;
     linkCardPlace.setAttribute('src', link);
 
-    buttonLikeCard.addEventListener('click', hadleLike);
-    buttonRemoveCard.addEventListener('click', handleRemove);
+    buttonLikeCard.addEventListener('click', hadleLikeCard);
+    buttonRemoveCard.addEventListener('click', handleRemoveCard);
     buttonFullScreen.addEventListener('click', (evt) => {
         fullScreenImg.src = linkCardPlace.src;
         fullScreenImg.setAttribute('alt', titleCardPlace.textContent);
         fullScreenImgCaption.textContent = titleCardPlace.textContent;
 
-        openPopupImage();
+        openPopupFullScreenImg();
     });
 
     return newCard;
 }
 
-const renderCard = (wrap, name, link) => {
+const renderInitialCard = (wrap, name, link) => {
     wrap.prepend(createCards(name, link));
 }
 
 //присвоение данных о карточке (имя + линк)
-const setInputPlace = (evt) => {
+const setInputPlaceValue = (evt) => {
     evt.preventDefault();
 
     const titlePlace = placeInputName.value;
     const linkPlace = placeInputLink.value;
 
-    renderCard(cardWrapper, titlePlace, linkPlace);
+    renderInitialCard(cardWrapper, titlePlace, linkPlace);
     formAddCard.reset();
 
     closePopup(popupAddCard);
@@ -122,11 +122,11 @@ buttonsCloseArray.forEach((btn) => {
 });
 
 initialCards.forEach((item) => {
-    renderCard(cardWrapper, item.name, item.link);
+    renderInitialCard(cardWrapper, item.name, item.link);
 });
 
-buttonEditProfile.addEventListener('click', openPopupEdit);
-buttonAddCard.addEventListener('click', openPopupAdd);
-popupEditProfile.addEventListener('submit', setInputValue);
-popupAddCard.addEventListener('submit', setInputPlace);
+buttonEditProfile.addEventListener('click', openPopupEditProfile);
+buttonAddCard.addEventListener('click', openPopupAddCards);
+popupEditProfile.addEventListener('submit', setInputProfileValue);
+popupAddCard.addEventListener('submit', setInputPlaceValue);
 
