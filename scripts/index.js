@@ -73,22 +73,22 @@ const hadleLike = (evt) => {
 const createCards = (name, link) => {
     const newCard = templateCard.content.cloneNode(true);
 
-    const likeBtn = newCard.querySelector('.button_type_like');
-    const removeBtn = newCard.querySelector('.button_type_remove');
-    const fullImgBtn = newCard.querySelector('.photo__button');
+    const buttonLikeCard = newCard.querySelector('.button_type_like');
+    const buttonRemoveCard = newCard.querySelector('.button_type_remove');
+    const buttonFullScreen = newCard.querySelector('.photo__button');
 
-    const namePlace = newCard.querySelector('.photo__title');
-    const linkPlace = newCard.querySelector('.photo__cover');
+    const titleCardPlace = newCard.querySelector('.photo__title');
+    const linkCardPlace = newCard.querySelector('.photo__cover');
 
-    namePlace.textContent = name;
-    linkPlace.setAttribute('src', link);
+    titleCardPlace.textContent = name;
+    linkCardPlace.setAttribute('src', link);
 
-    likeBtn.addEventListener('click', hadleLike);
-    removeBtn.addEventListener('click', handleRemove);
-    fullImgBtn.addEventListener('click', (evt) => {
-        fullScreenImg.src = linkPlace.src;
-        fullScreenImg.setAttribute('alt', namePlace.textContent);
-        fullScreenImgCaption.textContent = namePlace.textContent;
+    buttonLikeCard.addEventListener('click', hadleLike);
+    buttonRemoveCard.addEventListener('click', handleRemove);
+    buttonFullScreen.addEventListener('click', (evt) => {
+        fullScreenImg.src = linkCardPlace.src;
+        fullScreenImg.setAttribute('alt', titleCardPlace.textContent);
+        fullScreenImgCaption.textContent = titleCardPlace.textContent;
 
         openPopupImage();
     });
@@ -104,10 +104,10 @@ const renderCard = (wrap, name, link) => {
 const setInputPlace = (evt) => {
     evt.preventDefault();
 
-    const title = placeInputName.value;
-    const link = placeInputLink.value;
+    const titlePlace = placeInputName.value;
+    const linkPlace = placeInputLink.value;
 
-    renderCard(cardWrapper, title, link);
+    renderCard(cardWrapper, titlePlace, linkPlace);
     formAddCard.reset();
 
     closePopup(popupAddCard);
@@ -115,8 +115,7 @@ const setInputPlace = (evt) => {
 
 buttonsCloseArray.forEach((btn) => {
     btn.addEventListener('click', (evt) => {
-        const target = evt.target;
-        const currentPopup = target.closest('.popup');
+        const currentPopup = evt.target.closest('.popup');
 
         closePopup(currentPopup);
     });
