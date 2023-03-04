@@ -38,13 +38,13 @@
 
     <div class="popup popup_type_edit">
         <div class="popup__form">
-            <form name="finput" action="submit" method="post" class="form form_profile_input">
+            <form name="finput" action="submit" method="post" class="form form_profile_input" novalidate>
                 <h2 class="form__heading">Редактировать профиль</h2>
                 <fieldset class="form__input-area">
-                    <input type="text" name="name" id="name" class="input input_type_name" placeholder="Ваше имя..."
-                        value="">
-                    <input type="text" name="job" id="job" class="input input_type_job" placeholder="Ваша профессия..."
-                        value="">
+                    <input type="text" name="name" id="name-input" class="input input_type_name" placeholder="Ваше имя..."
+                        value="" minlength="2" maxlength="40">
+                    <input type="text" name="job" id="job-input" class="input input_type_job" placeholder="Ваша профессия..."
+                        value="" minlength="2" maxlength="200">
                 </fieldset>
                 <input type="submit" value="Сохранить" class="form__button">
             </form>
@@ -55,12 +55,12 @@
 
     <div class="popup popup_type_add">
         <div class="popup__form popup__form_type_add ">
-            <form name="finput" action="submit" method="post" class="form form_add_place">
+            <form name="finput" action="submit" method="post" class="form form_add_place" novalidate>
                 <h2 class="form__heading">Новое место</h2>
                 <fieldset class="form__input-area">
-                    <input type="text" name="place-name" id="place-name" class="input input_type_place-name"
+                    <input required type="text" name="place-name" id="place-name-input" class="input input_type_place-name"
                         placeholder="Название" value="">
-                    <input type="url" name="place-link" id="place-link" class="input input_type_place-link"
+                    <input required type="url" name="place-link" id="place-link-input" class="input input_type_place-link"
                         placeholder="Ссылка на картинку" value="">
                 </fieldset>
                 <input type="submit" value="Сохранить" class="form__button">
