@@ -13,12 +13,26 @@ function enableValidation() {
     });
 }
 
-const showError = (input, errorMessage) => {
-    input.classList.add('');
+
+
+const showError = (formElement, inputElement, errorMessage) => {
+    //находим span элемент с помошью шаблонной строки
+    const errorElement = formElement.querySelector(`${inputElement.id}-error`);
+    inputElement.classList.add('');
+
+    //присваиваем текст и класс span
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('');
 };
 
-const hideError = (input) => {
-    input.classList.remove('');
+const hideError = (formElement, inputElement) => {
+    //находим span элемент с помошью шаблонной строки
+    const errorElement = formElement.querySelector(`${inputElement.id}-error`);
+    inputElement.classList.remove('');
+
+    //очищаем span и удаляем класс
+    errorElement.textContent = '';
+    errorElement.classList.remove('');
 };
 
 enableValidation();
