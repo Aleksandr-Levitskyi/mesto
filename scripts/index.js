@@ -50,9 +50,7 @@ const openPopupFullScreenImg = () => {
 }
 
 //присвоние введенных имени и профессии
-function setInputProfileValue(evt) {
-    evt.preventDefault();
-
+function setInputProfileValue() {
     profileName.textContent = profileInputName.value;
     profileJob.textContent = profileInputJob.value;
 
@@ -101,8 +99,7 @@ const renderInitialCard = (wrap, name, link) => {
 }
 
 //присвоение данных о карточке (имя + линк)
-const setInputPlaceValue = (evt) => {
-    evt.preventDefault();
+const setInputPlaceValue = () => {
 
     const titlePlace = placeInputName.value;
     const linkPlace = placeInputLink.value;
