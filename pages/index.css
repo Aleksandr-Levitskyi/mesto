@@ -32,6 +32,7 @@
 
 /* button */
 @import url(../blocks/button/button.css);
+@import url(../blocks/button/_is-active/button_is-active.css);
 @import url(../blocks/button/_type/_add/button_type_add.css);
 @import url(../blocks/button/_type/_close/button_type_close.css);
 @import url(../blocks/button/_type/_edit/button_type_edit.css);
@@ -55,3 +56,7 @@
 
 /* input */
 @import url(../blocks/input/input.css);
+
+/* error */
+@import url(../blocks/error/error.css);
+@import url(../blocks/error/_is-active/error_is-active.css);

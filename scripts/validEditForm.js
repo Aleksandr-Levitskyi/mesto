@@ -1,45 +1,72 @@
-const formEdit = document.querySelector('.form_profile_input');
+//активация валидации
+function enableValidation() {
+    const formList = Array.from(document.querySelectorAll('.form'));
 
-const inputNameEdit = formEdit.querySelector('.input_type_name');
-const inputJobEdit = formEdit.querySelector('.input_type_job');
+    formList.forEach((form) => {
+        form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        });
 
-const errorNameEdit = formEdit.querySelector('name-input-error');
-const errorJobEdit = formEdit.querySelector(`${inputJobEdit.id}-error`);
+        setEventListeners(form);
+    })
+}
 
 //проверка валидации 
 function checkValidity(formElement, inputElement) {
     if (!inputElement.validity.valid) {
-        console.log('isInvalid');
         showError(formElement, inputElement, inputElement.validationMessage);
     } else {
-        console.log('isValid');
+        hideError(formElement, inputElement);
     }
 }
 
 function showError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
+    errorElement.classList.add('error_is-active');
     errorElement.textContent = errorMessage;
-    console.log(errorElement);
 }
 
 function hideError(formElement, inputElement) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
+    errorElement.classList.add('error_is-active');
     errorElement.textContent = "";
 }
 
+//проверяем валидность каждого инпута в форме,
+//если хотя бы один не валидный, то возвращаем false
+function hasInvalidInput(inputList) {
+    return inputList.some((input) => {
+        return !input.validity.valid;
+    });
+}
+
+//меняем стиль кнопки в зависимости от валидности инпута в форме
+function toggleButton(inputList, button) {
+    if (hasInvalidInput(inputList)) {
+        button.classList.add('button_is-active');
+    } else {
+        button.classList.remove('button_is-active');
+    }
+}
 
 //находим инпуты внутри формы и вешаем на нее обработчик 
 //с проверкой валидности ввода
 function setEventListeners(formElement) {
-    const inputElement = Array.from(formElement.querySelectorAll('.input'));
+    const inputList = Array.from(formElement.querySelectorAll('.input'));
+    const button = formElement.querySelector('.form__button');
 
-    inputElement.forEach((input) => {
+    console.log(button);
+
+    toggleButton(inputList, button);
+
+    inputList.forEach((input) => {
         input.addEventListener('input', function () {
             checkValidity(formElement, input);
+            toggleButton(inputList, button);
         });
     })
 }
 
-setEventListeners(formEdit);
+enableValidation();

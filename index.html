@@ -60,7 +60,7 @@
             <form name="finput" action="submit" method="post" class="form form_add_place" novalidate>
                 <h2 class="form__heading">Новое место</h2>
                 <fieldset class="form__input-area">
-                    <input required type="text" name="place-name" id="place-name-input"
+                    <input required minlength="2" maxlength="30" type="text" name="place-name" id="place-name-input"
                         class="input input_type_place-name" placeholder="Название" value="">
                     <span class="place-name-input-error"></span>
                     <input required type="url" name="place-link" id="place-link-input"

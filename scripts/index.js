@@ -24,6 +24,12 @@ const fullScreenImg = document.querySelector('.popup__cover');
 const fullScreenImgCaption = document.querySelector('.popup__cover-caption');
 
 
+function closeHandler(popup, evt) {
+    if (evt.key === 'Esc') {
+        closePopup(popup);
+    }
+}
+
 //ф-ция открытия попап (общая)
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
@@ -126,4 +132,5 @@ buttonEditProfile.addEventListener('click', openPopupEditProfile);
 buttonAddCard.addEventListener('click', openPopupAddCards);
 popupEditProfile.addEventListener('submit', setInputProfileValue);
 popupAddCard.addEventListener('submit', setInputPlaceValue);
+
 
