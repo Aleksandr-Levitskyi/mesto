@@ -45,9 +45,11 @@ function hasInvalidInput(inputList) {
 //меняем стиль кнопки в зависимости от валидности инпута в форме
 function toggleButton(inputList, button) {
     if (hasInvalidInput(inputList)) {
-        button.classList.add('button_is-active');
+        button.classList.add('form__button_disabled');
+        button.setAttribute('disabled', 'true');
     } else {
-        button.classList.remove('button_is-active');
+        button.classList.remove('form__button_disabled');
+        button.removeAttribute('disabled');
     }
 }
 
@@ -56,8 +58,6 @@ function toggleButton(inputList, button) {
 function setEventListeners(formElement) {
     const inputList = Array.from(formElement.querySelectorAll('.input'));
     const button = formElement.querySelector('.form__button');
-
-    console.log(button);
 
     toggleButton(inputList, button);
 

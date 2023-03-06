@@ -24,12 +24,6 @@ const fullScreenImg = document.querySelector('.popup__cover');
 const fullScreenImgCaption = document.querySelector('.popup__cover-caption');
 
 
-function closeHandler(popup, evt) {
-    if (evt.key === 'Esc') {
-        closePopup(popup);
-    }
-}
-
 //ф-ция открытия попап (общая)
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
@@ -128,9 +122,26 @@ initialCards.forEach((item) => {
     renderInitialCard(cardWrapper, item.name, item.link);
 });
 
+function closeHandler() {
+    const popupList = Array.from(document.querySelectorAll('.popup'));
+
+    popupList.forEach((popup) => {
+        document.addEventListener('keydown', (evt) => {
+            if (evt.key === 'Escape') {
+                closePopup(popup);
+            }
+        });
+        popup.addEventListener('click', () => {
+            console.log('test');
+        });
+    });
+}
+
+
 buttonEditProfile.addEventListener('click', openPopupEditProfile);
 buttonAddCard.addEventListener('click', openPopupAddCards);
 popupEditProfile.addEventListener('submit', setInputProfileValue);
 popupAddCard.addEventListener('submit', setInputPlaceValue);
+closeHandler();
 
 

@@ -32,7 +32,6 @@
 
 /* button */
 @import url(../blocks/button/button.css);
-@import url(../blocks/button/_is-active/button_is-active.css);
 @import url(../blocks/button/_type/_add/button_type_add.css);
 @import url(../blocks/button/_type/_close/button_type_close.css);
 @import url(../blocks/button/_type/_edit/button_type_edit.css);
@@ -42,6 +41,7 @@
 
 /* form */
 @import url(../blocks/form/__button/form__button.css);
+@import url(../blocks/form/__button/_disabled/form__button_disabled.css);
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__input-area/form__input-area.css);
 
