@@ -143,5 +143,3 @@ buttonAddCard.addEventListener('click', openPopupAddCards);
 popupEditProfile.addEventListener('submit', setInputProfileValue);
 popupAddCard.addEventListener('submit', setInputPlaceValue);
 closeHandler();
-
-
