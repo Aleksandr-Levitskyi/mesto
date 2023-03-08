@@ -56,6 +56,7 @@
 
 /* input */
 @import url(../blocks/input/input.css);
+@import url(../blocks/input/_type/_error/input_type_error.css);
 
 /* error */
 @import url(../blocks/error/error.css);

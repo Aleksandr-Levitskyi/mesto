@@ -1,5 +1,16 @@
 .error_is-active {
     display: block;
 
-    color: red;
+    margin: 5px 0 13px;
+
+    min-width: 164px;
+    min-height: 12px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: #FF0000;
 }

@@ -22,6 +22,7 @@ function checkValidity(formElement, inputElement) {
 
 function showError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(config.inputErrorClass);
 
     errorElement.classList.add(config.errorClass);
     errorElement.textContent = errorMessage;
@@ -29,6 +30,7 @@ function showError(formElement, inputElement, errorMessage) {
 
 function hideError(formElement, inputElement) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(config.inputErrorClass);
 
     errorElement.classList.add(config.errorClass);
     errorElement.textContent = "";
