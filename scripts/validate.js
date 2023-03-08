@@ -1,6 +1,6 @@
 //активация валидации
-function enableValidation() {
-    const formList = Array.from(document.querySelectorAll('.form'));
+function enableValidation(config) {
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
 
     formList.forEach((form) => {
         form.addEventListener('submit', (evt) => {
@@ -23,14 +23,14 @@ function checkValidity(formElement, inputElement) {
 function showError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-    errorElement.classList.add('error_is-active');
+    errorElement.classList.add(config.errorClass);
     errorElement.textContent = errorMessage;
 }
 
 function hideError(formElement, inputElement) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-    errorElement.classList.add('error_is-active');
+    errorElement.classList.add(config.errorClass);
     errorElement.textContent = "";
 }
 
@@ -45,10 +45,10 @@ function hasInvalidInput(inputList) {
 //меняем стиль кнопки в зависимости от валидности инпута в форме
 function toggleButton(inputList, button) {
     if (hasInvalidInput(inputList)) {
-        button.classList.add('form__button_disabled');
+        button.classList.add(config.inactiveButtonClass);
         button.setAttribute('disabled', 'true');
     } else {
-        button.classList.remove('form__button_disabled');
+        button.classList.remove(config.inactiveButtonClass);
         button.removeAttribute('disabled');
     }
 }
@@ -56,7 +56,7 @@ function toggleButton(inputList, button) {
 //находим инпуты внутри формы и вешаем на нее обработчик
 //с проверкой валидности ввода
 function setEventListeners(formElement) {
-    const inputList = Array.from(formElement.querySelectorAll('.input'));
+    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
     const button = formElement.querySelector('.form__button');
 
     toggleButton(inputList, button);
@@ -69,4 +69,4 @@ function setEventListeners(formElement) {
     })
 }
 
-enableValidation();
+enableValidation(config);
