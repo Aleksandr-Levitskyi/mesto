@@ -1,7 +1,7 @@
 .error {
     display: block;
     min-height: 30px;
-    margin: 5px 0 0;
+    margin: 5px 0 5px;
 
     visibility: hidden;
 }
