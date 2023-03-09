@@ -3,24 +3,20 @@ function enableValidation(config) {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
 
     formList.forEach((form) => {
-        form.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
-
-        setEventListeners(form);
+        setEventListeners(form, config);
     })
 }
 
 //проверка валидации
-function checkValidity(formElement, inputElement) {
+function checkValidity(formElement, inputElement, config) {
     if (!inputElement.validity.valid) {
-        showError(formElement, inputElement, inputElement.validationMessage);
+        showError(formElement, inputElement, inputElement.validationMessage, config);
     } else {
-        hideError(formElement, inputElement);
+        hideError(formElement, inputElement, config);
     }
 }
 
-function showError(formElement, inputElement, errorMessage) {
+function showError(formElement, inputElement, errorMessage, config) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(config.inputErrorClass);
 
@@ -28,7 +24,7 @@ function showError(formElement, inputElement, errorMessage) {
     errorElement.textContent = errorMessage;
 }
 
-function hideError(formElement, inputElement) {
+function hideError(formElement, inputElement, config) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(config.inputErrorClass);
 
@@ -45,7 +41,7 @@ function hasInvalidInput(inputList) {
 }
 
 //меняем стиль кнопки в зависимости от валидности инпута в форме
-function toggleButton(inputList, button) {
+function toggleButton(inputList, button, config) {
     if (hasInvalidInput(inputList)) {
         button.classList.add(config.inactiveButtonClass);
         button.setAttribute('disabled', 'true');
@@ -57,18 +53,19 @@ function toggleButton(inputList, button) {
 
 //находим инпуты внутри формы и вешаем на нее обработчик
 //с проверкой валидности ввода
-function setEventListeners(formElement) {
+function setEventListeners(formElement, config) {
     const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
     const button = formElement.querySelector('.form__button');
 
-    toggleButton(inputList, button);
+    toggleButton(inputList, button, config);
 
     inputList.forEach((input) => {
         input.addEventListener('input', function () {
-            checkValidity(formElement, input);
-            toggleButton(inputList, button);
+            checkValidity(formElement, input, config);
+            toggleButton(inputList, button, config);
         });
     })
 }
 
 enableValidation(config);
+

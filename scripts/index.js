@@ -28,7 +28,7 @@ const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 
   document.addEventListener('keydown', closeByEsc);
-  document.addEventListener('click', closeByOverlayClick);
+  document.addEventListener('mousedown', closeByOverlayClick);
 }
 //ф-ция закрытия попап (общая)
 const closePopup = (popup) => {
@@ -40,7 +40,9 @@ const closePopup = (popup) => {
 
 
 //присвоние введенных имени и профессии
-function setInputProfileValue() {
+function setInputProfileValue(evt) {
+  evt.preventDefault();
+
   profileName.textContent = profileInputName.value;
   profileJob.textContent = profileInputJob.value;
 
@@ -75,7 +77,7 @@ const createCard = (name, link) => {
 
   buttonLikeCard.addEventListener('click', hadleLikeCard);
   buttonRemoveCard.addEventListener('click', handleRemoveCard);
-  buttonFullScreen.addEventListener('click', (evt) => {
+  buttonFullScreen.addEventListener('click', () => {
     fullScreenImg.src = linkCardPlace.src;
     fullScreenImg.setAttribute('alt', titleCardPlace.textContent);
     fullScreenImgCaption.textContent = titleCardPlace.textContent;
@@ -91,7 +93,8 @@ const renderCard = (wrap, name, link) => {
 }
 
 //присвоение данных о карточке (имя + линк)
-const setInputPlaceValue = () => {
+const setInputPlaceValue = (evt) => {
+  evt.preventDefault();
 
   const titlePlace = placeInputName.value;
   const linkPlace = placeInputLink.value;
@@ -132,7 +135,6 @@ function closeByOverlayClick(evt) {
     closePopup(openedPopup);
   }
 }
-
 
 //обработчики кликов по кнопкам
 buttonAddCard.addEventListener('click', () => {

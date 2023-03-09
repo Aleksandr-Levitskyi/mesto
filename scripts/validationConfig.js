@@ -1,4 +1,4 @@
-//добавляешь config-объект
+//добавляем config-объект
 const config = {
     formSelector: '.form',
     inputSelector: '.input',
