@@ -1,6 +1,3 @@
-const templateCard = document.getElementById('card-template'); //шаблон карточки
-const cardWrapper = document.querySelector('.photo-cards'); //место куда нужно вставлять карточку
-
 const buttonsCloseArray = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
 const buttonEditProfile = document.querySelector('.button_type_edit'); //кнопка редактировать
 const buttonAddCard = document.querySelector('.button_type_add'); //кнопка добавить карточку
@@ -20,8 +17,18 @@ const popupFullScreenImg = document.querySelector('.popup_type_image');
 
 const formAddCard = document.querySelector('.form_add_place'); //форма добавления карточки
 
-const fullScreenImg = document.querySelector('.popup__cover');
-const fullScreenImgCaption = document.querySelector('.popup__cover-caption');
+//** -------- */
+
+const templateCard = document.getElementById('card-template').content; //шаблон карточки
+
+initialCards.forEach((item) => {
+  const card = new Card(item, templateCard);
+  card.renderCard();
+
+  console.log(card);
+});
+
+//** -------- */
 
 //ф-ция открытия попап (общая)
 const openPopup = (popup) => {
@@ -39,7 +46,7 @@ const closePopup = (popup) => {
 };
 
 
-//присвоние введенных имени и профессии
+//присвоение данных в профиль
 function setInputProfileValue(evt) {
   evt.preventDefault();
 
@@ -49,57 +56,14 @@ function setInputProfileValue(evt) {
   closePopup(popupEditProfile);
 }
 
-//удаление карточки, при клике на корзину
-const handleRemoveCard = (evt) => {
-  evt.target.closest('.photo').remove();
-}
-
-//лайк
-const hadleLikeCard = (evt) => {
-  evt.target.classList.toggle('button_type_like_is-active');
-}
-
-//код для добавления карточки
-const createCard = (name, link) => {
-  const newCard = templateCard.content.cloneNode(true);
-
-  const buttonLikeCard = newCard.querySelector('.button_type_like');
-  const buttonRemoveCard = newCard.querySelector('.button_type_remove');
-  const buttonFullScreen = newCard.querySelector('.photo__button');
-
-  const titleCardPlace = newCard.querySelector('.photo__title');
-  const linkCardPlace = newCard.querySelector('.photo__cover');
-
-  titleCardPlace.textContent = name;
-  linkCardPlace.setAttribute('src', link);
-  linkCardPlace.setAttribute('alt', name);
-
-
-  buttonLikeCard.addEventListener('click', hadleLikeCard);
-  buttonRemoveCard.addEventListener('click', handleRemoveCard);
-  buttonFullScreen.addEventListener('click', () => {
-    fullScreenImg.src = linkCardPlace.src;
-    fullScreenImg.setAttribute('alt', titleCardPlace.textContent);
-    fullScreenImgCaption.textContent = titleCardPlace.textContent;
-
-    openPopup(popupFullScreenImg);
-  });
-
-  return newCard;
-}
-
-const renderCard = (wrap, name, link) => {
-  wrap.prepend(createCard(name, link));
-}
-
-//присвоение данных о карточке (имя + линк)
+//присвоение данных в карточку (тайтл + линк)
 const setInputPlaceValue = (evt) => {
   evt.preventDefault();
 
   const titlePlace = placeInputName.value;
   const linkPlace = placeInputLink.value;
 
-  renderCard(cardWrapper, titlePlace, linkPlace);
+  renderCard(); // пока не знаю, как реализовать
   formAddCard.reset();
 
   const submitButton = formAddCard.querySelector('.form__button');
@@ -117,18 +81,14 @@ buttonsCloseArray.forEach((btn) => {
   });
 });
 
-initialCards.forEach((item) => {
-  renderCard(cardWrapper, item.name, item.link);
-});
-
-function closeByEsc(evt) {
+const closeByEsc = (evt) => {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
 
-function closeByOverlayClick(evt) {
+const closeByOverlayClick = (evt) => {
   const openedPopup = document.querySelector('.popup_opened');
 
   if (evt.target === openedPopup) {
