@@ -21,12 +21,13 @@ class Card {
     _handleFullScreen = () => {
         this._fullScreenImg = document.querySelector('.popup__cover');
         this._fullScreenImgCaption = document.querySelector('.popup__cover-caption');
+        this._popupFullScreenImg = document.querySelector('.popup_type_image');
 
         this._fullScreenImg.src = this._linkCardPlace.src;
         this._fullScreenImg.setAttribute('alt', this._titleCardPlace.textContent);
         this._fullScreenImgCaption.textContent = this._titleCardPlace.textContent;
 
-        openPopup(popupFullScreenImg);
+        this._openPopup(this._popupFullScreenImg);
     }
 
     _setEventListeners = () => {

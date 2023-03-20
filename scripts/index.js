@@ -1,4 +1,41 @@
 import Card from './Card.js'
+import FormValidator from './FormValidator.js'
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const config = {
+  formSelector: '.form',
+  inputSelector: '.input',
+  submitButtonSelector: 'popup__button',
+  inactiveButtonClass: 'form__button_disabled',
+  inputErrorClass: 'input_type_error',
+  errorClass: 'error_is-active'
+}
 
 const templateCard = document.getElementById('card-template').content; //шаблон карточки
 
@@ -20,6 +57,8 @@ const popupEditProfile = document.querySelector('.popup_type_edit'); //попа�
 
 const formAddCard = document.querySelector('.form_add_place'); //форма добавления карточки
 
+const formList = document.querySelectorAll('.form');
+
 
 //ф-ция открытия попап (общая)
 const openPopup = (popup) => {
@@ -35,12 +74,6 @@ const closePopup = (popup) => {
   document.removeEventListener('keydown', closeByEsc);
   document.removeEventListener('click', closeByOverlayClick);
 };
-
-//создание экземплятор карточки из массива
-initialCards.forEach((item) => {
-  const card = new Card(item, templateCard, openPopup, formAddCard);
-  card.renderCard();
-});
 
 //присвоение данных в профиль
 function setInputProfileValue(evt) {
@@ -104,3 +137,14 @@ buttonEditProfile.addEventListener('click', () => {
 popupEditProfile.addEventListener('submit', setInputProfileValue);
 popupAddCard.addEventListener('submit', setInputPlaceValue);
 
+//создание экземплятор карточки из массива
+initialCards.forEach((item) => {
+  const card = new Card(item, templateCard, openPopup, formAddCard);
+  card.renderCard();
+});
+
+
+formList.forEach((form) => {
+  const validateForm = new FormValidator(config, form);
+  validateForm.enableValidation();
+});
