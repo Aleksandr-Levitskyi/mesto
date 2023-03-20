@@ -1,3 +1,7 @@
+import Card from './Card.js'
+
+const templateCard = document.getElementById('card-template').content; //шаблон карточки
+
 const buttonsCloseArray = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
 const buttonEditProfile = document.querySelector('.button_type_edit'); //кнопка редактировать
 const buttonAddCard = document.querySelector('.button_type_add'); //кнопка добавить карточку
@@ -13,16 +17,8 @@ const profileJob = document.querySelector('.profile__job'); //профессия
 
 const popupAddCard = document.querySelector('.popup_type_add'); //попап добавления карточки
 const popupEditProfile = document.querySelector('.popup_type_edit'); //попап редактирования профиля
-const popupFullScreenImg = document.querySelector('.popup_type_image');
 
 const formAddCard = document.querySelector('.form_add_place'); //форма добавления карточки
-
-const templateCard = document.getElementById('card-template').content; //шаблон карточки
-
-initialCards.forEach((item) => {
-  const card = new Card(item, templateCard);
-  card.renderCard();
-});
 
 
 //ф-ция открытия попап (общая)
@@ -40,6 +36,11 @@ const closePopup = (popup) => {
   document.removeEventListener('click', closeByOverlayClick);
 };
 
+//создание экземплятор карточки из массива
+initialCards.forEach((item) => {
+  const card = new Card(item, templateCard, openPopup, formAddCard);
+  card.renderCard();
+});
 
 //присвоение данных в профиль
 function setInputProfileValue(evt) {
@@ -55,10 +56,9 @@ function setInputProfileValue(evt) {
 const setInputPlaceValue = (evt) => {
   evt.preventDefault();
 
-  const titlePlace = placeInputName.value;
-  const linkPlace = placeInputLink.value;
+  const card = new Card({ name: placeInputName.value, link: placeInputLink.value }, templateCard);
+  card.renderCard();
 
-  renderCard(); // пока не знаю, как реализовать
   formAddCard.reset();
 
   const submitButton = formAddCard.querySelector('.form__button');
