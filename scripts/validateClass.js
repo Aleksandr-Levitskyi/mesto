@@ -1,11 +1,13 @@
 class Card {
-    constructor(item, template, openPopup) {
+    constructor(item, template, openPopup, form) {
         this._card = template.cloneNode(true).children[0];
 
         this._name = item.name;
         this._link = item.link;
 
         this._openPopup = openPopup;
+
+        this._form = form;
     }
 
     _handleRemoveCard = () => {

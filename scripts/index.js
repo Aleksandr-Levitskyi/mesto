@@ -17,18 +17,13 @@ const popupFullScreenImg = document.querySelector('.popup_type_image');
 
 const formAddCard = document.querySelector('.form_add_place'); //форма добавления карточки
 
-//** -------- */
-
 const templateCard = document.getElementById('card-template').content; //шаблон карточки
 
 initialCards.forEach((item) => {
   const card = new Card(item, templateCard);
   card.renderCard();
-
-  console.log(card);
 });
 
-//** -------- */
 
 //ф-ция открытия попап (общая)
 const openPopup = (popup) => {
