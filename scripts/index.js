@@ -1,33 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const config = {
   formSelector: '.form',
   inputSelector: '.input',
@@ -37,7 +10,7 @@ const config = {
   errorClass: 'error_is-active'
 }
 
-const templateCard = document.getElementById('card-template').content; //шаблон карточки
+const templateCard = document.querySelector('#card-template').content; //шаблон карточки
 
 const buttonsCloseArray = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
 const buttonEditProfile = document.querySelector('.button_type_edit'); //кнопка редактировать
@@ -145,6 +118,6 @@ initialCards.forEach((item) => {
 
 
 formList.forEach((form) => {
-  const validateForm = new FormValidator(config, form);
-  validateForm.enableValidation();
+  const formValidator = new FormValidator(config, form);
+  formValidator.enableValidation();
 });
