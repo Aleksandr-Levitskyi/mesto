@@ -1,5 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
+import initialCards from './constants.js'
 
 const config = {
   formSelector: '.form',
@@ -9,9 +10,6 @@ const config = {
   inputErrorClass: 'input_type_error',
   errorClass: 'error_is-active'
 }
-
-const templateCard = document.querySelector('#card-template').content; //шаблон карточки
-
 const buttonsCloseArray = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
 const buttonEditProfile = document.querySelector('.button_type_edit'); //кнопка редактировать
 const buttonAddCard = document.querySelector('.button_type_add'); //кнопка добавить карточку
@@ -31,6 +29,7 @@ const popupEditProfile = document.querySelector('.popup_type_edit'); //попа�
 const formAddCard = document.querySelector('.form_add_place'); //форма добавления карточки
 
 const formList = document.querySelectorAll('.form');
+const container = document.querySelector('.photo-cards');
 
 
 //ф-ция открытия попап (общая)
@@ -58,14 +57,24 @@ function setInputProfileValue(evt) {
   closePopup(popupEditProfile);
 }
 
+const renderCard = (card) => {
+  container.prepend(card);
+}
+
 //присвоение данных в карточку (тайтл + линк)
 const setInputPlaceValue = (evt) => {
   evt.preventDefault();
 
-  const card = new Card({ name: placeInputName.value, link: placeInputLink.value }, templateCard);
-  card.renderCard();
+  //сюда нужно добавлять карточку 
+  //через createClass
 
-  formAddCard.reset();
+  const newValues = {
+    name: placeInputName.value,
+    link: placeInputLink.value
+  };
+
+  const card = new Card(newValues, openPopup);
+  renderCard(card.createCard());
 
   const submitButton = formAddCard.querySelector('.form__button');
   submitButton.setAttribute('disabled', 'true');
@@ -112,8 +121,8 @@ popupAddCard.addEventListener('submit', setInputPlaceValue);
 
 //создание экземплятор карточки из массива
 initialCards.forEach((item) => {
-  const card = new Card(item, templateCard, openPopup, formAddCard);
-  card.renderCard();
+  const card = new Card(item, openPopup);
+  renderCard(card.createCard());
 });
 
 

@@ -1,17 +1,23 @@
 class Card {
-    constructor(item, template, openPopup, form) {
-        this._card = template.cloneNode(true).children[0];
-
+    constructor(item, openPopup) {
         this._name = item.name;
         this._link = item.link;
 
         this._openPopup = openPopup;
+    }
 
-        this._form = form;
+    _getTemplate = () => {
+        this._template = document.querySelector('#card-template').content;
+        this._card = this._template.cloneNode(true);
+        console.log(this._templateCard); //отладка
+
+        this._buttonLikeCard = this._card.querySelector('.button_type_like');
+        this._buttonRemoveCard = this._card.querySelector('.button_type_remove');
+        this._buttonFullScreen = this._card.querySelector('.photo__button');
     }
 
     _handleRemoveCard = () => {
-        this._card.remove();
+        this._template.remove();
     }
 
     _handleLikeCard() {
@@ -31,16 +37,12 @@ class Card {
     }
 
     _setEventListeners = () => {
-        this._buttonLikeCard = this._card.querySelector('.button_type_like');
-        this._buttonRemoveCard = this._card.querySelector('.button_type_remove');
-        this._buttonFullScreen = this._card.querySelector('.photo__button');
-
         this._buttonRemoveCard.addEventListener('click', this._handleRemoveCard);
         this._buttonLikeCard.addEventListener('click', this._handleLikeCard);
         this._buttonFullScreen.addEventListener('click', this._handleFullScreen);
     }
 
-    _createCard() {
+    createCard() {
         this._titleCardPlace = this._card.querySelector('.photo__title');
         this._linkCardPlace = this._card.querySelector('.photo__cover');
 
@@ -50,12 +52,7 @@ class Card {
 
         this._setEventListeners();
 
-        return this._card;
-    }
-
-    renderCard() {
-        this._container = document.querySelector('.photo-cards');
-        this._container.prepend(this._createCard());
+        return this._template;
     }
 }
 
