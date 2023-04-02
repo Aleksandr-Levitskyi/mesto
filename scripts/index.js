@@ -10,6 +10,9 @@ const config = {
   inputErrorClass: 'input_type_error',
   errorClass: 'error_is-active'
 }
+
+const cardTemplate = document.querySelector('#card-template').content;
+
 const buttonsCloseArray = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
 const buttonEditProfile = document.querySelector('.button_type_edit'); //кнопка редактировать
 const buttonAddCard = document.querySelector('.button_type_add'); //кнопка добавить карточку
@@ -30,6 +33,19 @@ const formAddCard = document.querySelector('.form_add_place'); //форма до
 
 const formList = document.querySelectorAll('.form');
 const container = document.querySelector('.photo-cards');
+
+const fullScreenImg = document.querySelector('.popup__cover');
+const fullScreenImgCaption = document.querySelector('.popup__cover-caption');
+const popupFullScreenImg = document.querySelector('.popup_type_image');
+
+const handleOpenPopup = (name, link) => {
+
+  fullScreenImg.src = link;
+  fullScreenImg.setAttribute('alt', name);
+  fullScreenImgCaption.textContent = name;
+
+  openPopup(popupFullScreenImg);
+}
 
 
 //ф-ция открытия попап (общая)
@@ -65,15 +81,7 @@ const renderCard = (card) => {
 const setInputPlaceValue = (evt) => {
   evt.preventDefault();
 
-  //сюда нужно добавлять карточку 
-  //через createClass
-
-  const newValues = {
-    name: placeInputName.value,
-    link: placeInputLink.value
-  };
-
-  const card = new Card(newValues, openPopup);
+  const card = new Card({ name: placeInputName.value, link: placeInputLink.value }, cardTemplate, handleOpenPopup);
   renderCard(card.createCard());
 
   const submitButton = formAddCard.querySelector('.form__button');
@@ -98,6 +106,7 @@ const closeByEsc = (evt) => {
   }
 }
 
+
 const closeByOverlayClick = (evt) => {
   const openedPopup = document.querySelector('.popup_opened');
 
@@ -121,10 +130,9 @@ popupAddCard.addEventListener('submit', setInputPlaceValue);
 
 //создание экземплятор карточки из массива
 initialCards.forEach((item) => {
-  const card = new Card(item, openPopup);
+  const card = new Card(item, cardTemplate, handleOpenPopup);
   renderCard(card.createCard());
 });
-
 
 formList.forEach((form) => {
   const formValidator = new FormValidator(config, form);

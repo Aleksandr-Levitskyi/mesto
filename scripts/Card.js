@@ -1,15 +1,17 @@
 class Card {
-    constructor(item, openPopup) {
+    constructor(item, templateSelector, handleOpenPopup) {
         this._name = item.name;
         this._link = item.link;
 
-        this._openPopup = openPopup;
+        this._template = templateSelector;
+        this._handleOpenPopup = handleOpenPopup;
     }
 
     _getTemplate = () => {
-        this._template = document.querySelector('#card-template').content;
-        this._card = this._template.cloneNode(true);
-        console.log(this._templateCard); //отладка
+        this._card = this._template.querySelector('.photo').cloneNode(true);
+
+        this._titleCardPlace = this._card.querySelector('.photo__title');
+        this._linkCardPlace = this._card.querySelector('.photo__cover');
 
         this._buttonLikeCard = this._card.querySelector('.button_type_like');
         this._buttonRemoveCard = this._card.querySelector('.button_type_remove');
@@ -17,23 +19,15 @@ class Card {
     }
 
     _handleRemoveCard = () => {
-        this._template.remove();
+        this._card.remove();
     }
 
-    _handleLikeCard() {
-        this.classList.toggle('button_type_like_is-active');
+    _handleLikeCard = () => {
+        this._buttonLikeCard.classList.toggle('button_type_like_is-active');
     }
 
     _handleFullScreen = () => {
-        this._fullScreenImg = document.querySelector('.popup__cover');
-        this._fullScreenImgCaption = document.querySelector('.popup__cover-caption');
-        this._popupFullScreenImg = document.querySelector('.popup_type_image');
-
-        this._fullScreenImg.src = this._linkCardPlace.src;
-        this._fullScreenImg.setAttribute('alt', this._titleCardPlace.textContent);
-        this._fullScreenImgCaption.textContent = this._titleCardPlace.textContent;
-
-        this._openPopup(this._popupFullScreenImg);
+        this._handleOpenPopup(this._titleCardPlace.textContent, this._linkCardPlace.src);
     }
 
     _setEventListeners = () => {
@@ -43,8 +37,7 @@ class Card {
     }
 
     createCard() {
-        this._titleCardPlace = this._card.querySelector('.photo__title');
-        this._linkCardPlace = this._card.querySelector('.photo__cover');
+        this._getTemplate();
 
         this._titleCardPlace.textContent = this._name;
         this._linkCardPlace.setAttribute('src', this._link);
@@ -52,7 +45,7 @@ class Card {
 
         this._setEventListeners();
 
-        return this._template;
+        return this._card;
     }
 }
 
