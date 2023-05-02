@@ -9,8 +9,6 @@ ___
 
 ## Технологии
 
-- ES6 Modules
-- ООП
 - HTML5
 - javaScript
 - Таблица стилей CSS 

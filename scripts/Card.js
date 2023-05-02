@@ -1,43 +1,48 @@
 class Card {
-    constructor(item, templateSelector, handleOpenPopup) {
+    constructor(item, template, openPopup, form) {
+        this._card = template.cloneNode(true).children[0];
+
         this._name = item.name;
         this._link = item.link;
 
-        this._template = templateSelector;
-        this._handleOpenPopup = handleOpenPopup;
-    }
+        this._openPopup = openPopup;
 
-    _getTemplate = () => {
-        this._card = this._template.querySelector('.photo').cloneNode(true);
-
-        this._titleCardPlace = this._card.querySelector('.photo__title');
-        this._linkCardPlace = this._card.querySelector('.photo__cover');
-
-        this._buttonLikeCard = this._card.querySelector('.button_type_like');
-        this._buttonRemoveCard = this._card.querySelector('.button_type_remove');
-        this._buttonFullScreen = this._card.querySelector('.photo__button');
+        this._form = form;
     }
 
     _handleRemoveCard = () => {
         this._card.remove();
     }
 
-    _handleLikeCard = () => {
-        this._buttonLikeCard.classList.toggle('button_type_like_is-active');
+    _handleLikeCard() {
+        this.classList.toggle('button_type_like_is-active');
     }
 
     _handleFullScreen = () => {
-        this._handleOpenPopup(this._titleCardPlace.textContent, this._linkCardPlace.src);
+        this._fullScreenImg = document.querySelector('.popup__cover');
+        this._fullScreenImgCaption = document.querySelector('.popup__cover-caption');
+        this._popupFullScreenImg = document.querySelector('.popup_type_image');
+
+        this._fullScreenImg.src = this._linkCardPlace.src;
+        this._fullScreenImg.setAttribute('alt', this._titleCardPlace.textContent);
+        this._fullScreenImgCaption.textContent = this._titleCardPlace.textContent;
+
+        this._openPopup(this._popupFullScreenImg);
     }
 
     _setEventListeners = () => {
+        this._buttonLikeCard = this._card.querySelector('.button_type_like');
+        this._buttonRemoveCard = this._card.querySelector('.button_type_remove');
+        this._buttonFullScreen = this._card.querySelector('.photo__button');
+
         this._buttonRemoveCard.addEventListener('click', this._handleRemoveCard);
         this._buttonLikeCard.addEventListener('click', this._handleLikeCard);
         this._buttonFullScreen.addEventListener('click', this._handleFullScreen);
     }
 
-    createCard() {
-        this._getTemplate();
+    _createCard() {
+        this._titleCardPlace = this._card.querySelector('.photo__title');
+        this._linkCardPlace = this._card.querySelector('.photo__cover');
 
         this._titleCardPlace.textContent = this._name;
         this._linkCardPlace.setAttribute('src', this._link);
@@ -46,6 +51,11 @@ class Card {
         this._setEventListeners();
 
         return this._card;
+    }
+
+    renderCard() {
+        this._container = document.querySelector('.photo-cards');
+        this._container.prepend(this._createCard());
     }
 }
 
