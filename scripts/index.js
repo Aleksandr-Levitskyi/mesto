@@ -1,32 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import initialCards from './constants.js'
 
 const config = {
   formSelector: '.form',
@@ -37,7 +11,7 @@ const config = {
   errorClass: 'error_is-active'
 }
 
-const templateCard = document.getElementById('card-template').content; //шаблон карточки
+const templateCard = document.querySelector('#card-template').content; //шаблон карточки
 
 const buttonsCloseArray = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
 const buttonEditProfile = document.querySelector('.button_type_edit'); //кнопка редактировать
@@ -58,14 +32,26 @@ const popupEditProfile = document.querySelector('.popup_type_edit'); //попа�
 const formAddCard = document.querySelector('.form_add_place'); //форма добавления карточки
 
 const formList = document.querySelectorAll('.form');
+const container = document.querySelector('.photo-cards');
 
+const fullScreenImg = document.querySelector('.popup__cover');
+const fullScreenImgCaption = document.querySelector('.popup__cover-caption');
+const popupFullScreenImg = document.querySelector('.popup_type_image');
+
+const handleOpenPopup = (name, link) => {
+  fullScreenImg.src = link;
+  fullScreenImg.setAttribute('alt', name);
+  fullScreenImgCaption.textContent = name;
+
+  openPopup(popupFullScreenImg);
+}
 
 //ф-ция открытия попап (общая)
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 
   document.addEventListener('keydown', closeByEsc);
-  document.addEventListener('mousedown', closeByOverlayClick);
+  popup.addEventListener('mousedown', closeByOverlayClick);
 }
 //ф-ция закрытия попап (общая)
 const closePopup = (popup) => {
@@ -74,6 +60,7 @@ const closePopup = (popup) => {
   document.removeEventListener('keydown', closeByEsc);
   document.removeEventListener('click', closeByOverlayClick);
 };
+
 
 //присвоение данных в профиль
 function setInputProfileValue(evt) {
@@ -85,12 +72,16 @@ function setInputProfileValue(evt) {
   closePopup(popupEditProfile);
 }
 
+const renderCard = (card) => {
+  container.prepend(card);
+}
+
 //присвоение данных в карточку (тайтл + линк)
 const setInputPlaceValue = (evt) => {
   evt.preventDefault();
 
-  const card = new Card({ name: placeInputName.value, link: placeInputLink.value }, templateCard);
-  card.renderCard();
+  const card = new Card({ name: placeInputName.value, link: placeInputLink.value }, templateCard, handleOpenPopup);
+  renderCard(card.createCard());
 
   formAddCard.reset();
 
@@ -117,7 +108,7 @@ const closeByEsc = (evt) => {
 }
 
 const closeByOverlayClick = (evt) => {
-  const openedPopup = document.querySelector('.popup_opened');
+  const openedPopup = evt.currentTarget;
 
   if (evt.target === openedPopup) {
     closePopup(openedPopup);
@@ -139,12 +130,18 @@ popupAddCard.addEventListener('submit', setInputPlaceValue);
 
 //создание экземплятор карточки из массива
 initialCards.forEach((item) => {
-  const card = new Card(item, templateCard, openPopup, formAddCard);
-  card.renderCard();
+  const card = new Card(item, templateCard, handleOpenPopup);
+  renderCard(card.createCard());
 });
 
+const validators = {};
 
 formList.forEach((form) => {
-  const validateForm = new FormValidator(config, form);
-  validateForm.enableValidation();
+
+  const formValidator = new FormValidator(config, form);
+  validators[form.getAttribute('name')] = formValidator;
+  validators[form.getAttribute('name')].enableValidation();
 });
+
+
+validators[formAddCard.getAttribute('name')].toggleButton();

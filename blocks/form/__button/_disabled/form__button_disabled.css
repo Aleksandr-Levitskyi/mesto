@@ -1,6 +1,8 @@
 .form__button_disabled {
-    color: rgba(0, 0, 0, 1);
-    border: 1px solid #000000;
+    color: rgba(0, 0, 0, .15);
+    border: 1px solid rgba(0, 0, 0, .15);
     border-radius: 2px;
     background: none;
+
+    cursor: default;
 }
