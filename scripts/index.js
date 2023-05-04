@@ -142,6 +142,3 @@ formList.forEach((form) => {
   validators[form.getAttribute('name')] = formValidator;
   validators[form.getAttribute('name')].enableValidation();
 });
-
-
-validators[formAddCard.getAttribute('name')].toggleButton();
