@@ -3,7 +3,8 @@ class FormValidator {
         this._config = config;
         this._form = form;
 
-
+        this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+        this._button = this._form.querySelector('.form__button');
     }
 
     _checkValidity = (inputElement) => {
@@ -16,7 +17,6 @@ class FormValidator {
     }
 
     _showError = (inputElement, errorMessage) => {
-        console.log(errorMessage)
         this._errorElement = this._form.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.add(this._config.inputErrorClass);
 
@@ -32,13 +32,13 @@ class FormValidator {
         this._errorElement.textContent = "";
     }
 
-    _hasInvalidInput() {
+    _hasInvalidInput = () => {
         return this._inputList.some((input) => {
             return !input.validity.valid;
         });
     }
 
-    _toggleButton() {
+    toggleButton = () => {
         if (this._hasInvalidInput()) {
             this._button.classList.add(this._config.inactiveButtonClass);
             this._button.setAttribute('disabled', 'true');
@@ -48,22 +48,19 @@ class FormValidator {
         }
     }
 
-    _setEventListeners() {
-        this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-        this._button = this._form.querySelector('.form__button');
-
-        this._toggleButton();
+    _setEventListeners = () => {
+        this.toggleButton();
 
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._checkValidity(inputElement);
-                this._toggleButton();
+                this.toggleButton();
 
             });
         });
     }
 
-    enableValidation() {
+    enableValidation = () => {
         this._setEventListeners();
     }
 }
