@@ -1,17 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
-import initialCards from './constants.js'
-
-const config = {
-  formSelector: '.form',
-  inputSelector: '.input',
-  submitButtonSelector: 'popup__button',
-  inactiveButtonClass: 'form__button_disabled',
-  inputErrorClass: 'input_type_error',
-  errorClass: 'error_is-active'
-}
-
-const templateCard = document.querySelector('#card-template').content; //шаблон карточки
+import { initialCards, config } from './constants.js'
 
 const buttonsCloseArray = document.querySelectorAll('.button_type_close'); // собираем все кнопки с данным классом в массив
 const buttonEditProfile = document.querySelector('.button_type_edit'); //кнопка редактировать
@@ -76,19 +65,18 @@ const renderCard = (card) => {
   container.prepend(card);
 }
 
+const createCard = (name, link) => {
+  const card = new Card({ name, link }, '#card-template', handleOpenPopup);
+  return card.createCard();
+}
+
 //присвоение данных в карточку (тайтл + линк)
 const setInputPlaceValue = (evt) => {
   evt.preventDefault();
-
-  const card = new Card({ name: placeInputName.value, link: placeInputLink.value }, templateCard, handleOpenPopup);
-  renderCard(card.createCard());
-
+  renderCard(createCard(placeInputName.value, placeInputLink.value));
   formAddCard.reset();
 
-  const submitButton = formAddCard.querySelector('.form__button');
-  submitButton.setAttribute('disabled', 'true');
-  submitButton.classList.add('form__button_disabled');
-
+  validators[formAddCard.getAttribute('name')].toggleButton();
   closePopup(popupAddCard);
 }
 
@@ -130,8 +118,7 @@ popupAddCard.addEventListener('submit', setInputPlaceValue);
 
 //создание экземплятор карточки из массива
 initialCards.forEach((item) => {
-  const card = new Card(item, templateCard, handleOpenPopup);
-  renderCard(card.createCard());
+  renderCard(createCard(item.name, item.link));
 });
 
 const validators = {};
@@ -140,5 +127,8 @@ formList.forEach((form) => {
 
   const formValidator = new FormValidator(config, form);
   validators[form.getAttribute('name')] = formValidator;
-  validators[form.getAttribute('name')].enableValidation();
+  formValidator.enableValidation();
 });
+
+
+
