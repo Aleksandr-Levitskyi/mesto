@@ -8,7 +8,10 @@ class Card {
     }
 
     _getTemplate = () => {
-        this._card = this._template.querySelector('.photo').cloneNode(true);
+        this._card = document
+            .querySelector(this._template)
+            .content.querySelector('.photo')
+            .cloneNode(true);
 
         this._titleCardPlace = this._card.querySelector('.photo__title');
         this._linkCardPlace = this._card.querySelector('.photo__cover');
@@ -27,7 +30,7 @@ class Card {
     }
 
     _handleFullScreen = () => {
-        this._handleOpenPopup(this._titleCardPlace.textContent, this._linkCardPlace.src);
+        this._handleOpenPopup(this._name, this._link);
     }
 
     _setEventListeners = () => {
