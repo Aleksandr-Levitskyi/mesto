@@ -47,7 +47,7 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 
   document.removeEventListener('keydown', closeByEsc);
-  document.removeEventListener('click', closeByOverlayClick);
+  popup.removeEventListener('click', closeByOverlayClick);
 };
 
 
